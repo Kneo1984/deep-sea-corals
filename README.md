@@ -83,6 +83,84 @@ Python, Pandas, Seaborn, Matplotlib, Folium, PowerPoint API, Jupyter Notebook
 **Bedeutung:**  
 Das Projekt macht sichtbar, wie Datenanalysen helfen können, sensible Ökosysteme besser zu verstehen – und zeigt, warum Schutzmaßnahmen in Zeiten des globalen Wandels immer wichtiger werden.
 
+
 ---
 
+## **Überblick über den Datensatz: Deep Sea Coral & Sponge Database**
+
+### **1. Herkunft & Quelle**
+
+* Bereitgestellt von der **NOAA** (National Oceanic and Atmospheric Administration, USA).
+* Name: **Deep Sea Coral & Sponge Database**
+* Ziel: Langfristige Überwachung und Schutz tiefer mariner Ökosysteme.
+* Umfasst **weltweite Beobachtungen** von Tiefsee-Korallen, Schwämmen und ähnlichen Arten.
+
+---
+
+### **2. Datenumfang**
+
+* **Anzahl der Zeilen (Beobachtungen):** ca. **513.000**
+* **Anzahl der Spalten (Merkmale):** ca. **20**
+* Zeitlich: Beobachtungen reichen **über mehrere Jahrzehnte** (Jahre + Jahrzehnte analysierbar)
+* Geografisch: **Weltweit**, vor allem Atlantik, Pazifik, Südsee.
+
+---
+
+### **3. Schlüssel-Variablen**
+
+| Spalte                           | Bedeutung                                           |
+| -------------------------------- | --------------------------------------------------- |
+| `ScientificName`                 | Wissenschaftlicher Artname                          |
+| `ObservationDate`                | Datum der Beobachtung                               |
+| `Latitude`, `Longitude`          | Geografische Koordinaten                            |
+| `DepthInMeters`                  | Meerestiefe der Beobachtung                         |
+| `Station`, `SurveyID`, `EventID` | Beobachtungs-Metadaten (technisch, organisatorisch) |
+| `Locality`                       | Fundortname                                         |
+| `CatalogNumber`, `SampleID`      | Individuelle IDs der Proben                         |
+
+---
+
+### **4. Datenbereinigung & -vorbereitung**
+
+* **Fehlende Werte:** Teilweise viele NaNs (z. B. bei `Station`, `SurveyID`), wurden durch Platzhalter ersetzt.
+* **Datum:** In echtes `datetime`-Format umgewandelt, Fehlerhafte als `NaT` erkannt.
+* **Koordinaten & Tiefe:** In numerisches Format (`float`) konvertiert, Fehlerwerte (z. B. -999.0) entfernt.
+* **Whitespace in Texten** entfernt (z. B. `" Lophelia pertusa "` → `"Lophelia pertusa"`).
+* **Unbrauchbare Spalten** wie `SampleID` wurden optional entfernt.
+
+---
+
+### **5. Transformation & Analyse**
+
+* **Zeitliche Ableitungen:** Jahr, Monat, Dekade aus `ObservationDate`.
+* **Tiefenzonen:** Klassifizierung in Bins (`0–100m`, `100–500m`, … `6000–11000m`).
+* **Artenanalyse:**
+
+  * Anzahl **einzigartiger Arten**
+  * **Top 10/20 Arten** nach Häufigkeit
+  * Verteilung nach Tiefe (Boxplot, Stripplot)
+* **Geografische Analyse:**
+
+  * Top-Fundorte
+  * Weltweite Verteilung mit **Folium-Karte** (interaktiv)
+  * Breiten- und Längengrad-Bereich analysiert
+
+---
+
+### **6. Besonderheiten & Herausforderungen**
+
+* Viele **fehlende oder uneinheitliche Daten**, z. B. bei Metainformationen
+* Beobachtungen teils **historisch**, also nicht gleichmäßig verteilt
+* Geografisch sehr **divers**, dadurch spannend für Visualisierungen
+* Tiefe spielt eine **zentrale Rolle** – Lebensräume sind stark von ihr abhängig
+
+---
+
+### **7. Bedeutung des Datensatzes**
+
+* Unterstützt den **Schutz mariner Biodiversität** in der Tiefsee.
+* Grundlage für ökologische Einteilung, Monitoring und politische Maßnahmen.
+* Zeigt, **wo** (geografisch) und **wie tief** (ökologisch) bestimmte Arten auftreten.
+
+---
 
